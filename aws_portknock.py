@@ -27,30 +27,31 @@ def keep_open(sgid, port):
         time.sleep(5)
         click.echo("Sleeping")
 
+
 @click.command()
 @click.option('--port', help='Port to open')
 @click.option('--sgid', help='Security group ID')
 @click.option('--profile', default='default')
-def portknock(sgid, profile, port):
+def cli(sgid, profile, port):
     config = configparser.ConfigParser()
     cfg_file = os.path.join(os.path.expanduser('~'),
                             '.config',
                             'aws-portknock.ini')
     if os.path.exists(cfg_file):
         config.read(cfg_file)
-        if not sgid:
-            if profile in config and 'sgid' in config[profile]:
-                sgid = config[profile]['sgid']
-            else:
-                click.echo("Cannot determine security group ID", err=True)
-                sys.exit(1)
-        if not port:
-            if profile in config and 'port' in config[profile]:
-                port = config[profile]['port']
-            else:
-                port = 22
+    if not sgid:
+        if config.has_option(profile, 'sgid'):
+            sgid = config[profile]['sgid']
+        else:
+            click.echo("Cannot determine security group ID", err=True)
+            sys.exit(1)
+    if not port:
+        if config.has_option(profile, 'port'):
+            port = config[profile]['port']
+        else:
+            port = 22
     keep_open(sgid, port)
 
 
 if __name__ == '__main__':
-    portknock()
+    cli()
