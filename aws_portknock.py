@@ -57,9 +57,9 @@ def keep_open(sgid, port):
             click.echo(e.response['Error']['Message'])
         else:
             raise e
+    click.echo("Press CTRL-C when done.")
     while True:
-        time.sleep(5)
-        click.echo("Sleeping")
+        time.sleep(3600)
 
 
 @click.command()
