@@ -63,9 +63,9 @@ def keep_open(sgid, port):
 
 
 @click.command()
-@click.option('--port', help='Port to open')
-@click.option('--sgid', help='Security group ID')
-@click.option('--profile', default='default')
+@click.option('--port', type=int, help='Port to open.')
+@click.option('--profile', default='default', help='Configuration profile to use.')
+@click.option('--sgid', help='Security group ID.')
 def cli(sgid, profile, port):
     config = configparser.ConfigParser()
     cfg_file = os.path.join(os.path.expanduser('~'),
