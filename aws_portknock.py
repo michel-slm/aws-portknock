@@ -10,7 +10,12 @@ except:
 import os
 import sys
 import time
-from urllib2 import urlopen
+try:
+  # Python 2
+  from urllib2 import urlopen
+except:
+  # Python 3
+  from urllib.request import urlopen
 
 
 def close_port(sgid, cidr_ip, port):
