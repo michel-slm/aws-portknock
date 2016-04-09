@@ -10,12 +10,15 @@ except:
 import os
 import sys
 import time
-try:
-    # Python 2
-    from urllib2 import urlopen
-except:
+
+if sys.version_info.major >= 3:
     # Python 3
     from urllib.request import urlopen
+    python2 = False
+else:
+    # Python 2
+    from urllib2 import urlopen
+    python2 = True
 
 
 def close_port(sgid, cidr_ip, port):
@@ -31,7 +34,10 @@ def close_port(sgid, cidr_ip, port):
 
 
 def get_ip():
-    return "{}/32".format(urlopen('http://ip.42.pl/raw').read())
+    ip = urlopen('http://ip.42.pl/raw').read()
+    if not python2:
+        ip = ip.decode('utf-8')
+    return "{}/32".format(ip)
 
 
 def open_port(sgid, cidr_ip, port):
