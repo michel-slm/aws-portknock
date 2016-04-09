@@ -11,11 +11,11 @@ import os
 import sys
 import time
 try:
-  # Python 2
-  from urllib2 import urlopen
+    # Python 2
+    from urllib2 import urlopen
 except:
-  # Python 3
-  from urllib.request import urlopen
+    # Python 3
+    from urllib.request import urlopen
 
 
 def close_port(sgid, cidr_ip, port):
@@ -69,7 +69,8 @@ def keep_open(sgid, port):
 
 @click.command()
 @click.option('--port', type=int, help='Port to open.')
-@click.option('--profile', default='default', help='Configuration profile to use.')
+@click.option('--profile', default='default',
+              help='Configuration profile to use.')
 @click.option('--sgid', help='Security group ID.')
 def cli(sgid, profile, port):
     config = configparser.ConfigParser()
