@@ -1,1 +1,1 @@
-Michel Alexandre Salim <michel@michel-slm.name>
+Michel Lind <michel@michel-slm.name>
