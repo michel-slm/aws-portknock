@@ -9,7 +9,7 @@ install_reqs = parse_requirements(reqs_file, session=PipSession())
 
 setup(
     name='aws-portknock',
-    version='0.1',
+    version='0.1.1',
     py_modules=['aws_portknock'],
     description='Port knocking for AWS security groups',
     author='Michel Alexandre Salim',
